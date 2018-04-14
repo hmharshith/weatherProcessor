@@ -15,6 +15,10 @@ module.exports = {
 
         fireBase.initializeApp(fireStoreConfig);
         return fireBase.firestore();
+    } , 
+    
+    sendToFireStore: function (tempData) {
+
     }
 
 };

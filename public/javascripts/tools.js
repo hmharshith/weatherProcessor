@@ -1,4 +1,5 @@
 const fireBase = require("firebase");
+require("firebase/firestore");
 
 module.exports = {
 
@@ -17,8 +18,36 @@ module.exports = {
         return fireBase.firestore();
     } , 
     
-    sendToFireStore: function (tempData) {
+    sendToFireStore: function (db, tempData, callback) {
+        var datetime = new Date();
+        var weatherRef = db.collection("weatherData");
+        var data = {
+          "temp": parseInt(tempData),
+          "time": datetime
+        };
+        weatherRef.doc(datetime.toString()).set(data);
+        callback({
+            "Task" : "To upload temperature data to cloud FireStore",
+            "Status" : "Success",
+            "TimeStamp" : datetime
+        });
+    } , 
+    
+    getRecentUploads: function (db, callback) {
+        var weatherRef = db.collection("weatherData");
+        var data = {
+            temperature: []
+        };
 
+        var recentFilter = weatherRef.orderBy('time', 'desc').limit(5)
+            .get()
+            .then(function (docs)
+            {
+                docs.forEach(function (doc) {
+                    data.temperature.push(doc.data());
+                })
+                callback(data);
+            })
     }
 
 };

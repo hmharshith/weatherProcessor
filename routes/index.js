@@ -22,6 +22,15 @@ app.get("/", function (req, res) {
     })
 });
 
+app.get("/upload", function(req, res){
+    temp = req.query.temp;
+    tools.sendToFireStore(db, temp, function (response) {
+
+        console.log(" Temperature data uploaded for the timeStamp: " + response.TimeStamp);
+        res.setHeader('Content-Type', 'application/json');
+        res.send(response);
+})
+
 app.post("/upload", function (req, res) {
     temp = req.headers.temperature;
     tools.sendToFireStore(db, temp, function (response) {

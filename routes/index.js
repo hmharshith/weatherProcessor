@@ -29,6 +29,7 @@ app.get("/upload", function(req, res){
         console.log(" Temperature data uploaded for the timeStamp: " + response.TimeStamp);
         res.setHeader('Content-Type', 'application/json');
         res.send(response);
+    })
 })
 
 app.post("/upload", function (req, res) {

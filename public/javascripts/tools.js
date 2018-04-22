@@ -22,8 +22,9 @@ module.exports = {
         var datetime = new Date();
         var weatherRef = db.collection("weatherData");
         var data = {
-          "temp": parseInt(tempData),
-          "time": datetime
+          "temp": parseFloat(tempData),
+          "time": datetime , 
+          "location": "Vellore, Tamilnadu"
         };
         weatherRef.doc(datetime.toString()).set(data);
         callback({

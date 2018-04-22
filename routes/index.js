@@ -52,5 +52,5 @@ app.post("/getrecent", function (req, res) {
 });
 
 app.listen(process.env.PORT||3000 , function(){
-    console.log("Started server !");
+    console.log("Started server at port " + process.env.PORT);
 });
